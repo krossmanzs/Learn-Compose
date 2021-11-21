@@ -26,6 +26,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     LearnComposeTheme {
-        Greeting("Android")
+        Greeting("Linux")
     }
 }
