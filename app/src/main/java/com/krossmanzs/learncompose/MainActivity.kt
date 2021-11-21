@@ -3,83 +3,65 @@ package com.krossmanzs.learncompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val painter = painterResource(id = R.drawable.mountain)
-            val description = "A beautiful mountain, maybe everest?"
-            Box(modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(16.dp)) {
-                ImageCard(
-                    painter = painter,
-                    contentDescription = description,
-                    title = description
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun ImageCard(
-    painter: Painter,
-    contentDescription: String,
-    title: String,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp),
-        elevation = 5.dp
-    ) {
-        Box(modifier = Modifier.height(150.dp)) {
-            Image(
-                painter = painter,
-                contentDescription = contentDescription,
-                contentScale = ContentScale.Crop
+            val fontFamily = FontFamily(
+                Font(R.font.roboto_mono, FontWeight.Thin),
+                Font(R.font.robotomono_bold, FontWeight.Bold)
             )
+
             Box(modifier = Modifier
                 .fillMaxSize()
-                .background(brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color.Transparent,
-                        Color.Black
-                    ),
-                    startY = 350f
-                )))
-            Text(
-                text = title,
-                modifier = modifier
-                    .padding(5.dp)
-                    .align(Alignment.BottomStart),
-                style = TextStyle(
+                .background(Color(0xFF101010))
+            ) {
+                Text(
+                    text = buildAnnotatedString {
+                        withStyle(
+                            SpanStyle(
+                                color = Color.Green,
+                                fontSize = 50.sp
+                            )
+                        ) {
+                            append("J")
+                        }
+                        append("etpack ")
+
+                        withStyle(
+                            SpanStyle(
+                                color = Color.Green,
+                                fontSize = 50.sp
+                            )
+                        ) {
+                            append("C")
+                        }
+                        append("ompose")
+                    },
                     color = Color.White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                ),
-            )
+                    fontSize = 30.sp,
+                    fontFamily = fontFamily,
+                    fontWeight = FontWeight.Bold,
+                    textDecoration = TextDecoration.Underline
+                )
+            }
         }
     }
 }
